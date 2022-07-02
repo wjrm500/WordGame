@@ -1,0 +1,26 @@
+.row {
+    display: flex;
+}
+
+.outer-box {
+    display: flex;
+    height: 50px;
+    padding: 5px;
+    width: 50px;
+}
+
+.inner-box {
+    align-items: center;
+    background-color: #eeeeee;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    font-family: sans-serif;
+    justify-content: center;
+    width: 100%;
+}
+
+.inner-box:hover {
+    background-color: #cccccc;
+    cursor: pointer;
+}
