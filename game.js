@@ -89,10 +89,11 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
                     }
                     if (validWord) {
                         let wordLetters = word.split('');
+                        let playerLetterString = playerLetters.join(','); // Before splice
                         for (let wordLetter of wordLetters) {
                             let letterIndex = playerLetters.findIndex(x => x == wordLetter);
                             if (letterIndex == -1) {
-                                alert('You cannot form the word \'' + word + '\' with the letters \'' + playerLetters.join(',') + '\'');
+                                alert('You cannot form the word \'' + word + '\' with the letters \'' + playerLetterString + '\'');
                                 validWord = false;
                                 break;
                             } else {

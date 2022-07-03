@@ -1,1 +1,3 @@
 - Prevent player using the same word more than once by keeping track of words used
+- More common letters appear more frequently
+- More common letters appear towards centre of board?
