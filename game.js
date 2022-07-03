@@ -15,9 +15,25 @@ function createBoxes() {
         let row = rows[i];
         let boxElems = row.getElementsByClassName('inner-box')
         for (let j = 0; j < boxElems.length; j++) {
-            debugger;
             let boxElem = boxElems[j];
             let box = new Box(boxElem, i, j);
+            box.elem.addEventListener('click', function() {
+                let player = players[activePlayerIndex];
+                let addBox = false;
+                for (let playerBox of player.boxes) {
+                    if (Math.abs(playerBox.x - box.x) <= 1 && Math.abs(playerBox.y - box.y) <= 1) {
+                        addBox = true;
+                        break;
+                    }
+                }
+                if (addBox) {
+                    player.addBox(box);
+                    box.setPlayer(player);
+                    colorBoxes();
+                } else {
+                    alert('You can\'t go here!');
+                }
+            });
             box.setLetter(generateRandomLetter());
             grid.addBox(box);
         }
@@ -29,9 +45,6 @@ function colorBoxes() {
         if (box.player != null) {
             box.elem.style.backgroundColor = box.player.color;
             box.elem.style.color = 'white';
-        } else {
-            box.elem.style.backgroundColor = '#eeeeee';
-            box.elem.style.color = 'black';
         }
     }
 }
@@ -40,4 +53,5 @@ createBoxes();
 let player1 = new Player('Player 1', grid.getBox(0, 0), 'red');
 let player2 = new Player('Player 2', grid.getBox(7, 7), 'blue');
 let players = [player1, player2];
+let activePlayerIndex = 0;
 colorBoxes();

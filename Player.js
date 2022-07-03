@@ -6,4 +6,8 @@ export class Player {
         startBox.setPlayer(this);
         this.color = color;
     }
+
+    addBox(box) {
+        this.boxes.push(box);
+    }
 }
