@@ -1,3 +1,7 @@
+body {
+    font-family: sans-serif;
+}
+
 .row {
     display: flex;
 }
@@ -15,7 +19,6 @@
     border: 1px solid black;
     border-radius: 5px;
     display: flex;
-    font-family: sans-serif;
     justify-content: center;
     width: 100%;
 }
@@ -23,4 +26,13 @@
 .inner-box:hover {
     background-color: #cccccc;
     cursor: pointer;
+}
+
+table, th, td {
+    border: 1px solid black;
+    text-align: left;
+}
+
+.elem {
+    margin: 5px;
 }

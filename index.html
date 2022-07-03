@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="elem">It's <span id="active-player">Player 1</span>'s turn!</div>
     <div id="grid">
         <div class="row">
             <div class="outer-box">
@@ -218,6 +219,24 @@
             </div>
         </div>
     </div>
+    <div class="elem">
+        <label>Enter a word</label>
+        <input type="text" disabled>
+    </div>
+    <table id="score-table" class="elem">
+        <tr>
+            <th>Name</th>
+            <th>Score</th>
+        </tr>
+        <tr>
+            <td>Player 1</td>
+            <td id="player-1-score">0</td>
+        </tr>
+        <tr>
+            <td>Player 2</td>
+            <td id="player-2-score">0</td>
+        </tr>
+    </table>
     <script src="game.js"></script>
 </body>
 </html>
