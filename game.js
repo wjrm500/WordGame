@@ -30,6 +30,7 @@ function createBoxes() {
                     player.addBox(box);
                     box.setPlayer(player);
                     colorBoxes();
+                    changePlayer();
                 } else {
                     alert('You can\'t go here!');
                 }
@@ -49,9 +50,15 @@ function colorBoxes() {
     }
 }
 
+function changePlayer() {
+    activePlayerIndex = activePlayerIndex == 0 ? 1 : 0;
+    document.getElementById('active-player').innerHTML = players[activePlayerIndex].name;
+}
+
 createBoxes();
 let player1 = new Player('Player 1', grid.getBox(0, 0), 'red');
 let player2 = new Player('Player 2', grid.getBox(7, 7), 'blue');
 let players = [player1, player2];
 let activePlayerIndex = 0;
+document.getElementById('active-player').innerHTML = players[activePlayerIndex].name;
 colorBoxes();
