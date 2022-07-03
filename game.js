@@ -30,6 +30,7 @@ function createBoxes() {
                     player.addBox(box);
                     box.setPlayer(player);
                     colorBoxes();
+                    document.getElementById('prompt').innerHTML = 'Enter a word';
                     document.getElementById('word-entry').disabled = false;
                 } else {
                     alert('You can\'t go here!');
@@ -55,6 +56,7 @@ function changePlayer() {
     document.getElementById('active-player').innerHTML = players[activePlayerIndex].name;
     document.getElementById('word-entry').disabled = true;
     document.getElementById('word-entry').value = '';
+    document.getElementById('prompt').innerHTML = 'Click a square next to one of your squares';
 }
 
 createBoxes();
