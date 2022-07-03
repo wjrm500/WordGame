@@ -30,7 +30,7 @@ function createBoxes() {
                     player.addBox(box);
                     box.setPlayer(player);
                     colorBoxes();
-                    changePlayer();
+                    document.getElementById('word-entry').disabled = false;
                 } else {
                     alert('You can\'t go here!');
                 }
@@ -53,6 +53,8 @@ function colorBoxes() {
 function changePlayer() {
     activePlayerIndex = activePlayerIndex == 0 ? 1 : 0;
     document.getElementById('active-player').innerHTML = players[activePlayerIndex].name;
+    document.getElementById('word-entry').disabled = true;
+    document.getElementById('word-entry').value = '';
 }
 
 createBoxes();
@@ -61,4 +63,38 @@ let player2 = new Player('Player 2', grid.getBox(7, 7), 'blue');
 let players = [player1, player2];
 let activePlayerIndex = 0;
 document.getElementById('active-player').innerHTML = players[activePlayerIndex].name;
+document.getElementById('word-entry').addEventListener('keypress', function(evt) {
+    if (evt.key == 'Enter') {
+        let player = players[activePlayerIndex];
+        let playerLetters = [];
+        for (let box of player.boxes) {
+            playerLetters.push(box.letter);
+        }
+        let word = this.value.toUpperCase();
+        let wordLetters = word.split('');
+        let validWord = true;
+        for (let wordLetter of wordLetters) {
+            let letterIndex = playerLetters.findIndex(x => x == wordLetter);
+            if (letterIndex == -1) {
+                alert('You cannot form the word \'' + word + '\' with the letters \'' + playerLetters.join(',') + '\'');
+                validWord = false;
+                break;
+            } else {
+                playerLetters.splice(letterIndex, 1);
+            }
+        }
+        if (validWord) {
+            if (activePlayerIndex == 0) {
+                let player1Score = parseInt(document.getElementById('player-1-score').innerHTML);
+                player1Score += word.length;
+                document.getElementById('player-1-score').innerHTML = player1Score;
+            } else {
+                let player2Score = parseInt(document.getElementById('player-2-score').innerHTML);
+                player2Score += word.length;
+                document.getElementById('player-2-score').innerHTML = player2Score;
+            }
+        }
+        changePlayer();
+    }
+})
 colorBoxes();
