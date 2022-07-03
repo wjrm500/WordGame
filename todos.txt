@@ -1,0 +1,1 @@
+- Prevent player using the same word more than once by keeping track of words used

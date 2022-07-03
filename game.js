@@ -18,6 +18,10 @@ function createBoxes() {
             let boxElem = boxElems[j];
             let box = new Box(boxElem, i, j);
             box.elem.addEventListener('click', function() {
+                if (!document.getElementById('word-entry').disabled) {
+                    alert('Enter a word!');
+                    return;
+                }
                 let player = players[activePlayerIndex];
                 let addBox = false;
                 for (let playerBox of player.boxes) {
@@ -32,6 +36,7 @@ function createBoxes() {
                     colorBoxes();
                     document.getElementById('prompt').innerHTML = 'Enter a word';
                     document.getElementById('word-entry').disabled = false;
+                    document.getElementById('word-entry').focus();
                 } else {
                     alert('You can\'t go here!');
                 }
