@@ -108,13 +108,11 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
                     }
                     if (wordValid) {
                         if (activePlayerIndex == 0) {
-                            let player = players[activePlayerIndex];
                             player.wordsUsed.push(word);
                             let player1Score = parseInt(document.getElementById('player-1-score').innerHTML);
                             player1Score += word.length;
                             document.getElementById('player-1-score').innerHTML = player1Score;
                         } else {
-                            let player = players[activePlayerIndex];
                             player.wordsUsed.push(word);
                             let player2Score = parseInt(document.getElementById('player-2-score').innerHTML);
                             player2Score += word.length;
