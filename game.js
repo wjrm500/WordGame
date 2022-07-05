@@ -69,20 +69,39 @@ let player1 = new Player('Player 1', grid.getBox(0, 0), 'red');
 let player2 = new Player('Player 2', grid.getBox(7, 7), 'blue');
 let players = [player1, player2];
 let activePlayerIndex = 0;
+colorBoxes();
 document.getElementById('active-player').innerHTML = players[activePlayerIndex].name;
 document.getElementById('word-entry').addEventListener('keypress', function(evt) {
     if (evt.key == 'Enter') {
         let player = players[activePlayerIndex];
-        let playerLetters = [];
-        for (let box of player.boxes) {
-            playerLetters.push(box.letter);
-        }
         let word = this.value.toUpperCase();
+
+        // Check whether player has already used word
         if (player.wordsUsed.includes(word)) {
             alert('You\'ve already used the word ' + word);
             changePlayer();
             return;
         }
+        
+        // Check whether word can be formed from letters
+        let wordLetters = word.split('');
+        let playerLetters = [];
+        for (let box of player.boxes) {
+            playerLetters.push(box.letter);
+        }
+        let playerLetterString = playerLetters.join(','); // Before splice
+        for (let wordLetter of wordLetters) {
+            let letterIndex = playerLetters.findIndex(x => x == wordLetter);
+            if (letterIndex == -1) {
+                alert('You cannot form the word \'' + word + '\' with the letters \'' + playerLetterString + '\'');
+                changePlayer();
+                return;
+            } else {
+                playerLetters.splice(letterIndex, 1);
+            }
+        }
+
+        // Check whether word is valid English
         let url = 'https://api.dictionaryapi.dev/api/v2/entries/en/' + word;
         fetch(url).then(
             response => {
@@ -91,20 +110,6 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
                     if (response.status != 200) {
                         alert('\'' + word + '\' is not a valid English word!')
                         wordValid = false;
-                    }
-                    if (wordValid) {
-                        let wordLetters = word.split('');
-                        let playerLetterString = playerLetters.join(','); // Before splice
-                        for (let wordLetter of wordLetters) {
-                            let letterIndex = playerLetters.findIndex(x => x == wordLetter);
-                            if (letterIndex == -1) {
-                                alert('You cannot form the word \'' + word + '\' with the letters \'' + playerLetterString + '\'');
-                                wordValid = false;
-                                break;
-                            } else {
-                                playerLetters.splice(letterIndex, 1);
-                            }
-                        }
                     }
                     if (wordValid) {
                         if (activePlayerIndex == 0) {
@@ -125,4 +130,3 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
         )
     }
 })
-colorBoxes();
