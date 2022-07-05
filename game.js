@@ -106,16 +106,13 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
         fetch(url).then(
             response => {
                 response.json().then(function(json) {
-                    let wordValid = true;
-                    if (response.status != 200) {
-                        alert('\'' + word + '\' is not a valid English word!')
-                        wordValid = false;
-                    }
-                    if (wordValid) {
+                    if (response.status == 200) {
                         player.wordsUsed.push(word);
                         let playerScore = parseInt(player.scoreElement.innerHTML);
                         playerScore += word.length;
                         player.scoreElement.innerHTML = playerScore;
+                    } else {
+                        alert('\'' + word + '\' is not a valid English word!')
                     }
                     changePlayer();
                 });
