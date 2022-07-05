@@ -78,35 +78,44 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
             playerLetters.push(box.letter);
         }
         let word = this.value.toUpperCase();
+        if (player.wordsUsed.includes(word)) {
+            alert('You\'ve already used the word ' + word);
+            changePlayer();
+            return;
+        }
         let url = 'https://api.dictionaryapi.dev/api/v2/entries/en/' + word;
         fetch(url).then(
             response => {
                 response.json().then(function(json) {
-                    let validWord = true;
+                    let wordValid = true;
                     if (response.status != 200) {
                         alert('\'' + word + '\' is not a valid English word!')
-                        validWord = false;
+                        wordValid = false;
                     }
-                    if (validWord) {
+                    if (wordValid) {
                         let wordLetters = word.split('');
                         let playerLetterString = playerLetters.join(','); // Before splice
                         for (let wordLetter of wordLetters) {
                             let letterIndex = playerLetters.findIndex(x => x == wordLetter);
                             if (letterIndex == -1) {
                                 alert('You cannot form the word \'' + word + '\' with the letters \'' + playerLetterString + '\'');
-                                validWord = false;
+                                wordValid = false;
                                 break;
                             } else {
                                 playerLetters.splice(letterIndex, 1);
                             }
                         }
                     }
-                    if (validWord) {
+                    if (wordValid) {
                         if (activePlayerIndex == 0) {
+                            let player = players[activePlayerIndex];
+                            player.wordsUsed.push(word);
                             let player1Score = parseInt(document.getElementById('player-1-score').innerHTML);
                             player1Score += word.length;
                             document.getElementById('player-1-score').innerHTML = player1Score;
                         } else {
+                            let player = players[activePlayerIndex];
+                            player.wordsUsed.push(word);
                             let player2Score = parseInt(document.getElementById('player-2-score').innerHTML);
                             player2Score += word.length;
                             document.getElementById('player-2-score').innerHTML = player2Score;

@@ -5,6 +5,7 @@ export class Player {
         this.boxes.push(startBox);
         startBox.setPlayer(this);
         this.color = color;
+        this.wordsUsed = [];
     }
 
     addBox(box) {
