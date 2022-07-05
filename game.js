@@ -65,8 +65,8 @@ function changePlayer() {
 }
 
 createBoxes();
-let player1 = new Player('Player 1', grid.getBox(0, 0), 'red');
-let player2 = new Player('Player 2', grid.getBox(7, 7), 'blue');
+let player1 = new Player('Player 1', grid.getBox(0, 0), 'red', document.getElementById('player-1-score'));
+let player2 = new Player('Player 2', grid.getBox(7, 7), 'blue', document.getElementById('player-2-score'));
 let players = [player1, player2];
 let activePlayerIndex = 0;
 colorBoxes();
@@ -112,17 +112,10 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
                         wordValid = false;
                     }
                     if (wordValid) {
-                        if (activePlayerIndex == 0) {
-                            player.wordsUsed.push(word);
-                            let player1Score = parseInt(document.getElementById('player-1-score').innerHTML);
-                            player1Score += word.length;
-                            document.getElementById('player-1-score').innerHTML = player1Score;
-                        } else {
-                            player.wordsUsed.push(word);
-                            let player2Score = parseInt(document.getElementById('player-2-score').innerHTML);
-                            player2Score += word.length;
-                            document.getElementById('player-2-score').innerHTML = player2Score;
-                        }
+                        player.wordsUsed.push(word);
+                        let playerScore = parseInt(player.scoreElement.innerHTML);
+                        playerScore += word.length;
+                        player.scoreElement.innerHTML = playerScore;
                     }
                     changePlayer();
                 });
