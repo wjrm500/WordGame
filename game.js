@@ -116,14 +116,16 @@ function changePlayer() {
     for (let elem of document.getElementsByClassName('inner-box')) {
         elem.classList.replace('inactive', 'active');
     }
-    document.getElementById('active-player').innerHTML = players[activePlayerIndex].name;
+    let player = players[activePlayerIndex];
+    document.getElementById('active-player').style.color = player.color;
+    document.getElementById('active-player').innerHTML = player.name;
     document.getElementById('word-entry-container').classList.replace('active', 'inactive');
     document.getElementById('word-entry').disabled = true;
     document.getElementById('word-entry').value = '';
     document.getElementById('prompt').innerHTML = 'Click a square next to one of your squares';
 }
 
-let dimension = 10;
+let dimension = 8;
 createGrid(dimension);
 createBoxes();
 let player1 = new Player('Player 1', grid.getBox(0, 0), 'red', document.getElementById('player-1-score'));

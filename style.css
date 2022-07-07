@@ -12,6 +12,11 @@ h1 {
     font-family: fantasy;
 }
 
+#active-player {
+    color: red;
+    font-weight: bold;
+}
+
 #grid {
     display: grid;
     grid-auto-flow: row;
