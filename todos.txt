@@ -5,7 +5,6 @@
 - Volatile letters - letter starts to shake the go before it changes into a new letter
 - ? letters which can represent anything
 - Make it more obvious when you've scored points
-- Timer
 - API call taking a bit of time, could be sped up by loading words from dictionary into browser based on letters selected and length
 - API "FOR is not a valid English word"??
 

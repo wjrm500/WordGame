@@ -4,7 +4,7 @@ import { Grid } from './Grid.js';
 
 let grid = new Grid(document.getElementById('grid'));
 
-let missingWords = ['FOR', 'IS'];
+let missingWords = ['BE', 'FOR', 'IS']; // As this grows, put in separate file and load
 
 function createGrid(dimension) {
     for (let i = 0; i < dimension; i++) {
@@ -47,6 +47,7 @@ function changePlayer() {
     document.getElementById('word-entry').disabled = true;
     document.getElementById('word-entry').value = '';
     document.getElementById('prompt').innerHTML = 'Click a square next to one of your squares.';
+    document.getElementById('text-flash').style.fontSize = '12px';
 }
 
 var timeLimit = 30;
@@ -108,9 +109,27 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
                         let playerScore = parseInt(player.scoreElement.innerHTML);
                         playerScore += word.length;
                         player.scoreElement.innerHTML = playerScore;
+                        document.getElementById('text-flash').style.color = 'limegreen';
+                        document.getElementById('text-flash').innerHTML = '+' + word.length;
                     } else {
-                        alert('\'' + word + '\' is not a valid English word!')
+                        document.getElementById('text-flash').style.color = 'red';
+                        document.getElementById('text-flash').innerHTML = 'Nope!';
                     }
+                    document.getElementById('text-flash').style.display = 'block';
+                    let fontSize = 12;
+                    let maxFontSize = 1000;
+                    let fontGrow = setInterval(function() {
+                        if (fontSize >= maxFontSize) {
+                            document.getElementById('text-flash').style.fontSize = '12px';
+                            document.getElementById('text-flash').style.display = 'none';
+                            clearInterval(fontGrow);
+                        }
+                        let opacity = 1 - fontSize / maxFontSize;
+                        document.getElementById('text-flash').style.opacity = opacity;
+                        document.getElementById('text-flash').style.fontSize = fontSize + 'px';
+                        fontSize *= 1.05;
+                        fontSize = Math.round(fontSize);
+                    }, 7.5)
                     changePlayer();
                 });
             }

@@ -33,4 +33,5 @@ export function generateRandomLetter() {
         sum += letterFrequencies[letter];
         if (r <= sum) return letter;
     }
+    return 'E'; // Just in case!
 }
