@@ -33,6 +33,7 @@ export function colorBoxes() {
 }
 
 function changePlayer() {
+    timeTaken = 0;
     activePlayerIndex = activePlayerIndex == 0 ? 1 : 0;
     for (let elem of document.getElementsByClassName('inner-box')) {
         elem.classList.replace('inactive', 'active');
@@ -43,9 +44,20 @@ function changePlayer() {
     document.getElementById('word-entry-container').classList.replace('active', 'inactive');
     document.getElementById('word-entry').disabled = true;
     document.getElementById('word-entry').value = '';
-    document.getElementById('prompt').innerHTML = 'Click a square next to one of your squares';
+    document.getElementById('prompt').innerHTML = 'Click a square next to one of your squares.';
 }
 
+var timeLimit = 30;
+var timeTaken = 0;
+function countdown() {
+    if (timeTaken >= timeLimit) {
+        changePlayer();
+    }
+    document.getElementById('timer').innerHTML = Math.round(timeLimit - timeTaken);
+    timeTaken += 0.05;
+}
+countdown();
+setInterval(countdown, 50);
 let dimension = 8;
 createGrid(dimension);
 let player1 = new Player('Player 1', grid.getBox(0, 0), 'red', document.getElementById('player-1-score'));

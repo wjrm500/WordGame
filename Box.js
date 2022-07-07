@@ -32,7 +32,7 @@ export class Box {
                 for (let elem of document.getElementsByClassName('inner-box')) {
                     elem.classList.replace('active', 'inactive');
                 }
-                document.getElementById('prompt').innerHTML = 'Enter a word that can be formed by your letters';
+                document.getElementById('prompt').innerHTML = 'Enter a word that can be formed by your letters.';
                 document.getElementById('word-entry-container').classList.replace('inactive', 'active');
                 document.getElementById('word-entry').disabled = false;
                 document.getElementById('word-entry').focus();
