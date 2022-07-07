@@ -4,4 +4,4 @@
 - Bonus for using all letters?
 - Volatile letters - letter starts to shake the go before it changes into a new letter
 - ? letters which can represent anything
-- Automatically generate squares
+- Make disabled word entry and grid more obvious

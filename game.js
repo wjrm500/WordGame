@@ -18,7 +18,7 @@ function createGrid(dimension) {
             let outerBox = document.createElement('div');
             outerBox.classList.add('outer-box');
             let innerBox = document.createElement('div');
-            innerBox.classList.add('inner-box');
+            innerBox.classList.add('inner-box', 'active');
             outerBox.appendChild(innerBox);
             row.appendChild(outerBox);
         }
@@ -51,7 +51,11 @@ function createBoxes() {
                     player.addBox(box);
                     box.setPlayer(player);
                     colorBoxes();
+                    for (let elem of document.getElementsByClassName('inner-box')) {
+                        elem.classList.replace('active', 'inactive');
+                    }
                     document.getElementById('prompt').innerHTML = 'Enter a word';
+                    document.getElementById('word-entry-container').classList.replace('inactive', 'active');
                     document.getElementById('word-entry').disabled = false;
                     document.getElementById('word-entry').focus();
                 } else {
@@ -69,13 +73,18 @@ function colorBoxes() {
         if (box.player != null) {
             box.elem.style.backgroundColor = box.player.color;
             box.elem.style.color = 'white';
+            box.elem.style.border = '1px solid black';
         }
     }
 }
 
 function changePlayer() {
     activePlayerIndex = activePlayerIndex == 0 ? 1 : 0;
+    for (let elem of document.getElementsByClassName('inner-box')) {
+        elem.classList.replace('inactive', 'active');
+    }
     document.getElementById('active-player').innerHTML = players[activePlayerIndex].name;
+    document.getElementById('word-entry-container').classList.replace('active', 'inactive');
     document.getElementById('word-entry').disabled = true;
     document.getElementById('word-entry').value = '';
     document.getElementById('prompt').innerHTML = 'Click a square next to one of your squares';
