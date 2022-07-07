@@ -7,7 +7,24 @@ let grid = new Grid();
 function generateRandomLetter() {
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     return alphabet[Math.floor(Math.random() * alphabet.length)];
-  }
+}
+
+function createGrid(dimension) {
+    let grid = document.getElementById('grid');
+    for (let i = 0; i < dimension; i++) {
+        let row = document.createElement('div');
+        row.classList.add('row');
+        for (let j = 0; j < dimension; j++) {
+            let outerBox = document.createElement('div');
+            outerBox.classList.add('outer-box');
+            let innerBox = document.createElement('div');
+            innerBox.classList.add('inner-box');
+            outerBox.appendChild(innerBox);
+            row.appendChild(outerBox);
+        }
+        grid.appendChild(row);
+    }
+}
 
 function createBoxes() {
     let rows = document.getElementsByClassName('row');
@@ -64,9 +81,11 @@ function changePlayer() {
     document.getElementById('prompt').innerHTML = 'Click a square next to one of your squares';
 }
 
+let dimension = 10;
+createGrid(dimension);
 createBoxes();
 let player1 = new Player('Player 1', grid.getBox(0, 0), 'red', document.getElementById('player-1-score'));
-let player2 = new Player('Player 2', grid.getBox(7, 7), 'blue', document.getElementById('player-2-score'));
+let player2 = new Player('Player 2', grid.getBox(dimension - 1, dimension - 1), 'blue', document.getElementById('player-2-score'));
 let players = [player1, player2];
 let activePlayerIndex = 0;
 colorBoxes();

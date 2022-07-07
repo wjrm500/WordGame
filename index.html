@@ -8,236 +8,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="elem">It's <span id="active-player"></span>'s turn!</div>
-    <div id="prompt" class="elem">Click a square next to one of your squares</div>
-    <div id="grid">
-        <div class="row">
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
+    <div class="container">
+        <h1>LETTER PERFECT</h1>
+        <div class="elem">It's <span id="active-player"></span>'s turn!</div>
+        <div id="prompt" class="elem">Click a square next to one of your squares</div>
+        <div id="grid">
+            <!-- JS INSERTS GRID HERE -->
         </div>
-        <div class="row">
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
+        <div class="elem">
+            <label>Enter a word</label>
+            <input id="word-entry" type="text" style="text-transform:uppercase" disabled>
         </div>
-        <div class="row">
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-            <div class="outer-box">
-                <div class="inner-box"></div>
-            </div>
-        </div>
+        <table id="score-table" class="elem">
+            <tr>
+                <th>Name</th>
+                <th>Score</th>
+            </tr>
+            <tr>
+                <td>Player 1</td>
+                <td id="player-1-score">0</td>
+            </tr>
+            <tr>
+                <td>Player 2</td>
+                <td id="player-2-score">0</td>
+            </tr>
+        </table>
     </div>
-    <div class="elem">
-        <label>Enter a word</label>
-        <input id="word-entry" type="text" style="text-transform:uppercase" disabled>
-    </div>
-    <table id="score-table" class="elem">
-        <tr>
-            <th>Name</th>
-            <th>Score</th>
-        </tr>
-        <tr>
-            <td>Player 1</td>
-            <td id="player-1-score">0</td>
-        </tr>
-        <tr>
-            <td>Player 2</td>
-            <td id="player-2-score">0</td>
-        </tr>
-    </table>
     <script src="game.js" type="module"></script>
 </body>
 </html>
