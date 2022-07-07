@@ -4,6 +4,8 @@ import { Grid } from './Grid.js';
 
 let grid = new Grid(document.getElementById('grid'));
 
+let missingWords = ['FOR', 'IS'];
+
 function createGrid(dimension) {
     for (let i = 0; i < dimension; i++) {
         let row = document.createElement('div');
@@ -100,8 +102,8 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
         let url = 'https://api.dictionaryapi.dev/api/v2/entries/en/' + word;
         fetch(url).then(
             response => {
-                response.json().then(function(json) {
-                    if (response.status == 200) {
+                response.json().then(function() {
+                    if (missingWords.includes(word) || response.status == 200) {
                         player.wordsUsed.push(word);
                         let playerScore = parseInt(player.scoreElement.innerHTML);
                         playerScore += word.length;
