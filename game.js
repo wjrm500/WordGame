@@ -4,6 +4,7 @@ import { Grid } from './Grid.js';
 import { generateRandomLetter } from './randomLetter.js';
 
 let grid = new Grid();
+let players, activePlayerIndex;
 
 function createGrid(dimension) {
     let grid = document.getElementById('grid');
@@ -75,6 +76,13 @@ function colorBoxes() {
     }
 }
 
+function createPlayers() {
+    let player1 = new Player('Player 1', grid.getBox(0, 0), 'red', document.getElementById('player-1-score'));
+    let player2 = new Player('Player 2', grid.getBox(dimension - 1, dimension - 1), 'blue', document.getElementById('player-2-score'));
+    players = [player1, player2];
+    activePlayerIndex = 0;
+}
+
 function changePlayer() {
     activePlayerIndex = activePlayerIndex == 0 ? 1 : 0;
     for (let elem of document.getElementsByClassName('inner-box')) {
@@ -92,10 +100,7 @@ function changePlayer() {
 let dimension = 8;
 createGrid(dimension);
 createBoxes();
-let player1 = new Player('Player 1', grid.getBox(0, 0), 'red', document.getElementById('player-1-score'));
-let player2 = new Player('Player 2', grid.getBox(dimension - 1, dimension - 1), 'blue', document.getElementById('player-2-score'));
-let players = [player1, player2];
-let activePlayerIndex = 0;
+createPlayers();
 colorBoxes();
 document.getElementById('active-player').innerHTML = players[activePlayerIndex].name;
 document.getElementById('word-entry').addEventListener('keypress', function(evt) {
