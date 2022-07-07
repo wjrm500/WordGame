@@ -8,11 +8,16 @@ body {
     flex-direction: column;
 }
 
+h1 {
+    font-family: fantasy;
+}
+
 #grid {
     display: grid;
     grid-auto-flow: row;
     grid-gap: 5px;
     height: 500px;
+    margin-top: 20px;
     width: 500px;
 }
 
@@ -21,6 +26,10 @@ body {
     grid-auto-columns: 1fr;
     grid-auto-flow: column;
     grid-gap: 5px;
+}
+
+.outer-box {
+    box-shadow: 0 0 10px lightgray;
 }
 
 .inner-box {
@@ -39,18 +48,10 @@ body {
     cursor: pointer;
 }
 
-table, th, td {
-    border: 1px solid black;
-    text-align: left;
-}
-
-.elem {
-    margin: 5px;
-}
-
 .word-entry-container {
     border: 1px solid lightgray;
     border-radius: 5px;
+    box-shadow: 0 0 10px lightgray;
     box-sizing: border-box;
     display: flex;
     margin-top: 20px;
@@ -74,4 +75,22 @@ table, th, td {
     box-sizing: border-box;
     text-transform: uppercase;
     width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    border-radius: 5px;
+    box-shadow: 0 0 10px lightgray;
+    color: black;
+    margin-top: 20px;
+    width: 500px;
+}
+
+table tr:first {
+    border-bottom: 1px solid lightblue;
+}
+
+th, td {
+    padding: 5px 0px;
+    text-align: center;
 }
