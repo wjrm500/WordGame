@@ -3,11 +3,10 @@ import { Player } from './Player.js';
 import { Grid } from './Grid.js';
 import { generateRandomLetter } from './randomLetter.js';
 
-let grid = new Grid();
+let grid = new Grid(document.getElementById('grid'));
 let players, activePlayerIndex;
 
 function createGrid(dimension) {
-    let grid = document.getElementById('grid');
     for (let i = 0; i < dimension; i++) {
         let row = document.createElement('div');
         row.classList.add('row');
@@ -18,19 +17,8 @@ function createGrid(dimension) {
             innerBox.classList.add('inner-box', 'active');
             outerBox.appendChild(innerBox);
             row.appendChild(outerBox);
-        }
-        grid.appendChild(row);
-    }
-}
 
-function createBoxes() {
-    let rows = document.getElementsByClassName('row');
-    for (let i = 0; i < rows.length; i++) {
-        let row = rows[i];
-        let boxElems = row.getElementsByClassName('inner-box')
-        for (let j = 0; j < boxElems.length; j++) {
-            let boxElem = boxElems[j];
-            let box = new Box(boxElem, i, j);
+            let box = new Box(innerBox, i, j);
             box.elem.addEventListener('click', function() {
                 if (!document.getElementById('word-entry').disabled) {
                     alert('Enter a word!');
@@ -63,6 +51,7 @@ function createBoxes() {
             box.setLetter(generateRandomLetter());
             grid.addBox(box);
         }
+        grid.elem.appendChild(row);
     }
 }
 
@@ -99,7 +88,7 @@ function changePlayer() {
 
 let dimension = 8;
 createGrid(dimension);
-createBoxes();
+// createBoxes();
 createPlayers();
 colorBoxes();
 document.getElementById('active-player').innerHTML = players[activePlayerIndex].name;

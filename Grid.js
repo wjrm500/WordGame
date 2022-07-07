@@ -1,5 +1,6 @@
 export class Grid {
-    constructor() {
+    constructor(elem) {
+        this.elem = elem;
         this.boxes = [];
     }
 
