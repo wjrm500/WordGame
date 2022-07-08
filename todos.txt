@@ -7,6 +7,9 @@
 - Make it more obvious when you've scored points
 - API call taking a bit of time, could be sped up by loading words from dictionary into browser based on letters selected and length
 - API "FOR is not a valid English word"??
+- Game over when player scores a certain number of points - do we allow second player a final go to catch up?
+- Game over when all squares are used
 
 - Ideas...
     - Letters that if player lands on, they can remove one of their opponent's letters
+    - Speed bonus?

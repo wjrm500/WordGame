@@ -15,4 +15,8 @@ export class Grid {
             }
         }
     }
+
+    getRandomBox() {
+        return this.boxes[Math.floor(Math.random() * this.boxes.length)];
+    }
 }

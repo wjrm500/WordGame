@@ -61,6 +61,17 @@ function countdown() {
 }
 countdown();
 setInterval(countdown, 50);
+function volatileBoxes() {
+    if (Math.random() > 0.9) {
+        let randomBox = grid.getRandomBox();
+        randomBox.elem.classList.add('shaking');
+        setTimeout(function() {
+            randomBox.switchLetter();
+            randomBox.elem.classList.remove('shaking');
+        }, 5000);
+    }
+}
+setInterval(volatileBoxes, 1000);
 let dimension = 8;
 createGrid(dimension);
 let player1 = new Player('Player 1', grid.getBox(0, 0), 'red', document.getElementById('player-1-score'));

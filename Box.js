@@ -11,7 +11,6 @@ export class Box {
         this.setLetter(generateRandomLetter());
         let box = this;
         this.elem.addEventListener('click', function() {
-            // debugger;
             if (!document.getElementById('word-entry').disabled) {
                 alert('Enter a word!');
                 return;
@@ -49,5 +48,15 @@ export class Box {
 
     setPlayer(player) {
         this.player = player;
+    }
+
+    switchLetter() {
+        while (true) {
+            let newLetter = generateRandomLetter();
+            if (newLetter != this.letter) {
+                this.setLetter(newLetter);
+                break;
+            }
+        }
     }
 }
