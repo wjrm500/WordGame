@@ -18,8 +18,7 @@ export class Box {
             let player = players[activePlayerIndex];
             let addBox = false;
             for (let playerBox of player.boxes) {
-                let sameBox = box.x == playerBox.x && box.y == playerBox.y;
-                if (!sameBox && Math.abs(playerBox.x - box.x) <= 1 && Math.abs(playerBox.y - box.y) <= 1) {
+                if (!player.boxes.includes(box) && Math.abs(playerBox.x - box.x) <= 1 && Math.abs(playerBox.y - box.y) <= 1) {
                     addBox = true;
                     break;
                 }
