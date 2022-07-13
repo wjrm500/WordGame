@@ -13,6 +13,7 @@ export class Box {
         this.elem.addEventListener('click', function() {
             if (!document.getElementById('word-entry').disabled) {
                 flyingText('red', 'Enter a word!');
+                document.getElementById('word-entry').focus();
                 return;
             }
             let player = players[activePlayerIndex];
