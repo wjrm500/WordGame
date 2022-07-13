@@ -12,6 +12,10 @@
 - Volatility depend on number of squares
 - More obvious ending
 - Sounds for correct / incorrect words
+- Still allowing you to click your own box
+- Allow first player to win on second player's go if second player doesn't get high enough but had chance to
+- WHen it says enter a word it takes focus from box
+- Note winning score needed below or above score table
 
 - Ideas...
     - Letters that if player lands on, they can remove one of their opponent's letters

@@ -63,7 +63,7 @@ export function flyingText(color, content) {
 }
 
 let dimension = 5;
-let winningScore = dimension;
+let winningScore = dimension * 5;
 var timeLimit = 30;
 var timeTaken = 0;
 function countdown() {
@@ -136,11 +136,14 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
                         player.scoreElement.innerHTML = playerScore;
                         flyingText('limegreen', '+' + word.length);
                         if (playerScore >= winningScore) {
-                            let maxPossibleScoreForOtherPlayers = Math.max(...players.filter(x => players.findIndex(y => x == y) > activePlayerIndex).map(x => x.score + x.boxes.length));
-                            if (playerScore > maxPossibleScoreForOtherPlayers) {
-                                alert(player.name + ' wins!');
-                            } else {
-                                alert(player.name + ' will win unless somebody overtakes their score by the end of this round!')
+                            let lockedInScores = players.filter(x => players.findIndex(y => x == y) < activePlayerIndex).map(x => x.score);
+                            let potentialScores = players.filter(x => players.findIndex(y => x == y) > activePlayerIndex).map(x => x.score + x.boxes.length + 1);
+                            let scoreToBeat = Math.max(...lockedInScores, ...potentialScores);
+                            console.log(player.name + ': ' + playerScore + ' and score to beat: ' + scoreToBeat);
+                            if (playerScore > scoreToBeat) {
+                                console.log(player.name + ' wins!')
+                                document.getElementById('winner-banner').style.display = 'flex';
+                                document.getElementById('winning-player').innerHTML = player.name;
                             }
                         } 
                     } else {
