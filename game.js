@@ -50,6 +50,26 @@ function changePlayer() {
     document.getElementById('text-flash').style.fontSize = '12px';
 }
 
+function flyingText(color, content) {
+    document.getElementById('text-flash').style.color = color;
+    document.getElementById('text-flash').innerHTML = content;
+    document.getElementById('text-flash').style.display = 'block';
+    let fontSize = 12;
+    let maxFontSize = 1000;
+    let fontGrow = setInterval(function() {
+        if (fontSize >= maxFontSize) {
+            document.getElementById('text-flash').style.fontSize = '12px';
+            document.getElementById('text-flash').style.display = 'none';
+            clearInterval(fontGrow);
+        }
+        let opacity = 1 - fontSize / maxFontSize;
+        document.getElementById('text-flash').style.opacity = opacity;
+        document.getElementById('text-flash').style.fontSize = fontSize + 'px';
+        fontSize *= 1.05;
+        fontSize = Math.round(fontSize);
+    }, 7.5);
+}
+
 let dimension = 5;
 var timeLimit = 30;
 var timeTaken = 0;
@@ -120,27 +140,10 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
                         let playerScore = parseInt(player.scoreElement.innerHTML);
                         playerScore += word.length;
                         player.scoreElement.innerHTML = playerScore;
-                        document.getElementById('text-flash').style.color = 'limegreen';
-                        document.getElementById('text-flash').innerHTML = '+' + word.length;
+                        flyingText('limegreen', '+' + word.length);
                     } else {
-                        document.getElementById('text-flash').style.color = 'red';
-                        document.getElementById('text-flash').innerHTML = 'Nope!';
+                        flyingText('red', 'Nope!');
                     }
-                    document.getElementById('text-flash').style.display = 'block';
-                    let fontSize = 12;
-                    let maxFontSize = 1000;
-                    let fontGrow = setInterval(function() {
-                        if (fontSize >= maxFontSize) {
-                            document.getElementById('text-flash').style.fontSize = '12px';
-                            document.getElementById('text-flash').style.display = 'none';
-                            clearInterval(fontGrow);
-                        }
-                        let opacity = 1 - fontSize / maxFontSize;
-                        document.getElementById('text-flash').style.opacity = opacity;
-                        document.getElementById('text-flash').style.fontSize = fontSize + 'px';
-                        fontSize *= 1.05;
-                        fontSize = Math.round(fontSize);
-                    }, 7.5)
                     changePlayer();
                 });
             }
