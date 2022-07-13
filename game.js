@@ -73,7 +73,7 @@ function checkWin() {
             if (player.score > scoreToBeat) {
                 disableGrid();
                 disableWordEntry();
-                document.getElementById('winner-banner').style.display = 'flex';
+                document.getElementById('winner-banner').classList.add('fade-in');
                 document.getElementById('winning-player').innerHTML = player.name;
                 return true;
             }
@@ -94,6 +94,8 @@ function changePlayer() {
     document.getElementById('active-player').innerHTML = player.name;
     enableGrid();
     disableWordEntry();
+    clearInterval(countdownInterval);
+    clearInterval(volatileBoxesInterval);
 }
 
 let textFlash = document.getElementById('text-flash');
@@ -121,7 +123,7 @@ function countdown() {
     timeTaken += 0.05;
 }
 countdown();
-setInterval(countdown, 50);
+let countdownInterval = setInterval(countdown, 50);
 function volatileBoxes() {
     if (Math.random() > (1 - dimension / 50)) {
         let randomBox = grid.getRandomBox();
@@ -132,7 +134,7 @@ function volatileBoxes() {
         }, 5000);
     }
 }
-setInterval(volatileBoxes, 1000);
+let volatileBoxesInterval = setInterval(volatileBoxes, 1000);
 createGrid(dimension);
 let player1 = new Player('Player 1', grid.getBox(0, 0), 'red', document.getElementById('player-1-score'));
 let player2 = new Player('Player 2', grid.getBox(dimension - 1, dimension - 1), 'blue', document.getElementById('player-2-score'));
