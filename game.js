@@ -47,28 +47,19 @@ function changePlayer() {
     document.getElementById('word-entry').disabled = true;
     document.getElementById('word-entry').value = '';
     document.getElementById('prompt').innerHTML = 'Click a square next to one of your squares.';
-    document.getElementById('text-flash').style.fontSize = '12px';
 }
 
+let textFlash = document.getElementById('text-flash');
+textFlash.addEventListener('animationend', function() {
+    if (this.classList.contains('font-grow')) {
+        this.classList.remove('font-grow');
+    }
+});
+
 export function flyingText(color, content) {
-    let textFlash = document.getElementById('text-flash');
-    textFlash.style.display = 'block';
     textFlash.style.color = color;
     textFlash.innerHTML = content;
-    let fontSize = 12;
-    let maxFontSize = 1000;
-    let fontGrow = setInterval(function() {
-        if (fontSize >= maxFontSize) {
-            textFlash.style.fontSize = '12px';
-            textFlash.style.display = 'none';
-            clearInterval(fontGrow);
-        }
-        let opacity = 1 - fontSize / maxFontSize;
-        textFlash.style.opacity = opacity;
-        textFlash.style.fontSize = fontSize + 'px';
-        fontSize *= 1.05;
-        fontSize = Math.round(fontSize);
-    }, 10);
+    textFlash.classList.add('font-grow');
 }
 
 let dimension = 5;
@@ -154,4 +145,4 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
             }
         )
     }
-})
+});
