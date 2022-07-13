@@ -11,6 +11,9 @@ export class Player {
     }
 
     addBox(box) {
+        if (box.player != null && box.player != this) {
+            box.player.boxes = box.player.boxes.filter(x => x != box);
+        }
         this.boxes.push(box);
     }
 }
