@@ -63,7 +63,7 @@ export function flyingText(color, content) {
 }
 
 let dimension = 5;
-let winningScore = dimension * 5;
+let winningScore = dimension;
 var timeLimit = 30;
 var timeTaken = 0;
 function countdown() {
@@ -111,7 +111,7 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
         for (let box of player.boxes) {
             playerLetters.push(box.letter);
         }
-        let playerLetterString = playerLetters.join(','); // Before splice
+        // let playerLetterString = playerLetters.join(','); // Before splice
         for (let wordLetter of wordLetters) {
             let letterIndex = playerLetters.findIndex(x => x == wordLetter);
             if (letterIndex == -1) {
@@ -132,10 +132,16 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
                         player.wordsUsed.push(word);
                         let playerScore = parseInt(player.scoreElement.innerHTML);
                         playerScore += word.length;
+                        player.score += word.length;
                         player.scoreElement.innerHTML = playerScore;
                         flyingText('limegreen', '+' + word.length);
-                        if (playerScore > winningScore) {
-                            alert(player.name + ' wins!')
+                        if (playerScore >= winningScore) {
+                            let maxPossibleScoreForOtherPlayers = Math.max(...players.filter(x => players.findIndex(y => x == y) > activePlayerIndex).map(x => x.score + x.boxes.length));
+                            if (playerScore > maxPossibleScoreForOtherPlayers) {
+                                alert(player.name + ' wins!');
+                            } else {
+                                alert(player.name + ' will win unless somebody overtakes their score by the end of this round!')
+                            }
                         } 
                     } else {
                         flyingText('red', 'Invalid word!');

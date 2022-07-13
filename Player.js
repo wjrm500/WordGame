@@ -7,6 +7,7 @@ export class Player {
         this.color = color;
         this.wordsUsed = [];
         this.scoreElement = scoreElement;
+        this.score = 0;
     }
 
     addBox(box) {
