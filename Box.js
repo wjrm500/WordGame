@@ -1,5 +1,5 @@
 import { generateRandomLetter } from './randomLetter.js';
-import { players, activePlayerIndex, colorBoxes, flyingText } from './game.js';
+import { players, activePlayerIndex, colorBoxes, flyingText, disableGrid, enableWordEntry } from './game.js';
 
 export class Box {
     constructor(elem, x, y) {
@@ -28,13 +28,8 @@ export class Box {
                 player.addBox(box);
                 box.setPlayer(player);
                 colorBoxes();
-                for (let elem of document.getElementsByClassName('inner-box')) {
-                    elem.classList.replace('active', 'inactive');
-                }
-                document.getElementById('prompt').innerHTML = 'Enter a word that can be formed by your letters.';
-                document.getElementById('word-entry-container').classList.replace('inactive', 'active');
-                document.getElementById('word-entry').disabled = false;
-                document.getElementById('word-entry').focus();
+                disableGrid();
+                enableWordEntry();
             } else {
                 flyingText('red', 'You can\'t go here!');
             }

@@ -4,7 +4,7 @@ import { Grid } from './Grid.js';
 
 let grid = new Grid(document.getElementById('grid'));
 
-let missingWords = ['BE', 'FOR', 'IS']; // As this grows, put in separate file and load
+let missingWords = ['BE', 'FOR', 'IS', 'WAS']; // As this grows, put in separate file and load
 
 function createGrid(dimension) {
     for (let i = 0; i < dimension; i++) {
@@ -34,19 +34,66 @@ export function colorBoxes() {
     }
 }
 
-function changePlayer() {
-    timeTaken = 0;
-    activePlayerIndex = activePlayerIndex == 0 ? 1 : 0;
+function enableGrid() {
+    document.getElementById('prompt').innerHTML = 'Click a square next to one of your squares.';
     for (let elem of document.getElementsByClassName('inner-box')) {
         elem.classList.replace('inactive', 'active');
+    }
+}
+
+export function disableGrid() {
+    for (let elem of document.getElementsByClassName('inner-box')) {
+        elem.classList.replace('active', 'inactive');
+    }
+}
+
+export function enableWordEntry() {
+    document.getElementById('prompt').innerHTML = 'Enter a word that can be formed by your letters.';
+    document.getElementById('word-entry-container').classList.replace('inactive', 'active');
+    document.getElementById('word-entry').disabled = false;
+    document.getElementById('word-entry').focus();
+}
+
+function disableWordEntry() {
+    document.getElementById('word-entry-container').classList.replace('active', 'inactive');
+    document.getElementById('word-entry').disabled = true;
+    document.getElementById('word-entry').value = '';
+}
+
+function checkWin() {
+    let actualScores = players.slice(0, activePlayerIndex + 1).map(x => x.score);
+    let potentialScores = players.slice(activePlayerIndex + 1).map(x => x.score + x.boxes.length + 1);
+    let allScores = [...actualScores, ...potentialScores];
+    for (let i = 0; i < players.length; i++) {
+        let player = players[i];
+        if (player.score >= winningScore) {
+            let allScoresCopy = [...allScores];
+            allScoresCopy.splice(i, 1);
+            let scoreToBeat = Math.max(...allScoresCopy);
+            if (player.score > scoreToBeat) {
+                disableGrid();
+                disableWordEntry();
+                document.getElementById('winner-banner').style.display = 'flex';
+                document.getElementById('winning-player').innerHTML = player.name;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function changePlayer() {
+    if (checkWin()) return; 
+    timeTaken = 0;
+    activePlayerIndex += 1;
+    if (activePlayerIndex >= players.length) {
+        activePlayerIndex = 0;
     }
     let player = players[activePlayerIndex];
     document.getElementById('active-player').style.color = player.color;
     document.getElementById('active-player').innerHTML = player.name;
-    document.getElementById('word-entry-container').classList.replace('active', 'inactive');
-    document.getElementById('word-entry').disabled = true;
-    document.getElementById('word-entry').value = '';
-    document.getElementById('prompt').innerHTML = 'Click a square next to one of your squares.';
+    enableGrid();
+    disableWordEntry();
 }
 
 let textFlash = document.getElementById('text-flash');
@@ -63,7 +110,7 @@ export function flyingText(color, content) {
 }
 
 let dimension = 5;
-let winningScore = dimension * 5;
+let winningScore = dimension;
 var timeLimit = 30;
 var timeTaken = 0;
 function countdown() {
@@ -111,7 +158,6 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
         for (let box of player.boxes) {
             playerLetters.push(box.letter);
         }
-        // let playerLetterString = playerLetters.join(','); // Before splice
         for (let wordLetter of wordLetters) {
             let letterIndex = playerLetters.findIndex(x => x == wordLetter);
             if (letterIndex == -1) {
@@ -134,18 +180,7 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
                         playerScore += word.length;
                         player.score += word.length;
                         player.scoreElement.innerHTML = playerScore;
-                        flyingText('limegreen', '+' + word.length);
-                        if (playerScore >= winningScore) {
-                            let lockedInScores = players.filter(x => players.findIndex(y => x == y) < activePlayerIndex).map(x => x.score);
-                            let potentialScores = players.filter(x => players.findIndex(y => x == y) > activePlayerIndex).map(x => x.score + x.boxes.length + 1);
-                            let scoreToBeat = Math.max(...lockedInScores, ...potentialScores);
-                            console.log(player.name + ': ' + playerScore + ' and score to beat: ' + scoreToBeat);
-                            if (playerScore > scoreToBeat) {
-                                console.log(player.name + ' wins!')
-                                document.getElementById('winner-banner').style.display = 'flex';
-                                document.getElementById('winning-player').innerHTML = player.name;
-                            }
-                        } 
+                        flyingText('limegreen', '+' + word.length); 
                     } else {
                         flyingText('red', 'Invalid word!');
                     }
