@@ -7,6 +7,7 @@ body {
     font-size: 12px;
     left: 50%;
     position: fixed;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     top: 50%;
     transform: translate(-50%, -50%);
     white-space: nowrap;

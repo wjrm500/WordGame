@@ -1,5 +1,5 @@
 import { generateRandomLetter } from './randomLetter.js';
-import { players, activePlayerIndex, colorBoxes } from './game.js';
+import { players, activePlayerIndex, colorBoxes, flyingText } from './game.js';
 
 export class Box {
     constructor(elem, x, y) {
@@ -12,7 +12,7 @@ export class Box {
         let box = this;
         this.elem.addEventListener('click', function() {
             if (!document.getElementById('word-entry').disabled) {
-                alert('Enter a word!');
+                flyingText('red', 'Enter a word!');
                 return;
             }
             let player = players[activePlayerIndex];
@@ -36,7 +36,7 @@ export class Box {
                 document.getElementById('word-entry').disabled = false;
                 document.getElementById('word-entry').focus();
             } else {
-                alert('You can\'t go here!');
+                flyingText('red', 'You can\'t go here!');
             }
         });
     }

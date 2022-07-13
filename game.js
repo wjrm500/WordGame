@@ -50,7 +50,7 @@ function changePlayer() {
     document.getElementById('text-flash').style.fontSize = '12px';
 }
 
-function flyingText(color, content) {
+export function flyingText(color, content) {
     let textFlash = document.getElementById('text-flash');
     textFlash.style.display = 'block';
     textFlash.style.color = color;
@@ -72,6 +72,7 @@ function flyingText(color, content) {
 }
 
 let dimension = 5;
+let winningScore = dimension * 5;
 var timeLimit = 30;
 var timeTaken = 0;
 function countdown() {
@@ -108,7 +109,7 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
 
         // Check whether player has already used word
         if (player.wordsUsed.includes(word)) {
-            flyingText('crimson', 'Already used!');
+            flyingText('red', 'Already used!');
             changePlayer();
             return;
         }
@@ -123,7 +124,7 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
         for (let wordLetter of wordLetters) {
             let letterIndex = playerLetters.findIndex(x => x == wordLetter);
             if (letterIndex == -1) {
-                flyingText('crimson', 'Incorrect letters!');
+                flyingText('red', 'Incorrect letters!');
                 changePlayer();
                 return;
             } else {
@@ -142,8 +143,11 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
                         playerScore += word.length;
                         player.scoreElement.innerHTML = playerScore;
                         flyingText('limegreen', '+' + word.length);
+                        if (playerScore > winningScore) {
+                            alert(player.name + ' wins!')
+                        } 
                     } else {
-                        flyingText('crimson', 'Invalid word!');
+                        flyingText('red', 'Invalid word!');
                     }
                     changePlayer();
                 });

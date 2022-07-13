@@ -9,6 +9,9 @@
 - API "FOR is not a valid English word"??
 - Game over when player scores a certain number of points - do we allow second player a final go to catch up?
 - Game over when all squares are used
+- Volatility depend on number of squares
+- More obvious ending
+- Sounds for correct / incorrect words
 
 - Ideas...
     - Letters that if player lands on, they can remove one of their opponent's letters
