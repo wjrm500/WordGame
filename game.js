@@ -50,6 +50,7 @@ function changePlayer() {
     document.getElementById('text-flash').style.fontSize = '12px';
 }
 
+let dimension = 5;
 var timeLimit = 30;
 var timeTaken = 0;
 function countdown() {
@@ -62,7 +63,7 @@ function countdown() {
 countdown();
 setInterval(countdown, 50);
 function volatileBoxes() {
-    if (Math.random() > 0.9) {
+    if (Math.random() > (1 - dimension / 50)) {
         let randomBox = grid.getRandomBox();
         randomBox.elem.classList.add('shaking');
         setTimeout(function() {
@@ -72,7 +73,6 @@ function volatileBoxes() {
     }
 }
 setInterval(volatileBoxes, 1000);
-let dimension = 8;
 createGrid(dimension);
 let player1 = new Player('Player 1', grid.getBox(0, 0), 'red', document.getElementById('player-1-score'));
 let player2 = new Player('Player 2', grid.getBox(dimension - 1, dimension - 1), 'blue', document.getElementById('player-2-score'));
