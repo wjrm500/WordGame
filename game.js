@@ -51,23 +51,24 @@ function changePlayer() {
 }
 
 function flyingText(color, content) {
-    document.getElementById('text-flash').style.color = color;
-    document.getElementById('text-flash').innerHTML = content;
-    document.getElementById('text-flash').style.display = 'block';
+    let textFlash = document.getElementById('text-flash');
+    textFlash.style.display = 'block';
+    textFlash.style.color = color;
+    textFlash.innerHTML = content;
     let fontSize = 12;
     let maxFontSize = 1000;
     let fontGrow = setInterval(function() {
         if (fontSize >= maxFontSize) {
-            document.getElementById('text-flash').style.fontSize = '12px';
-            document.getElementById('text-flash').style.display = 'none';
+            textFlash.style.fontSize = '12px';
+            textFlash.style.display = 'none';
             clearInterval(fontGrow);
         }
         let opacity = 1 - fontSize / maxFontSize;
-        document.getElementById('text-flash').style.opacity = opacity;
-        document.getElementById('text-flash').style.fontSize = fontSize + 'px';
+        textFlash.style.opacity = opacity;
+        textFlash.style.fontSize = fontSize + 'px';
         fontSize *= 1.05;
         fontSize = Math.round(fontSize);
-    }, 7.5);
+    }, 10);
 }
 
 let dimension = 5;
@@ -107,7 +108,7 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
 
         // Check whether player has already used word
         if (player.wordsUsed.includes(word)) {
-            alert('You\'ve already used the word ' + word);
+            flyingText('crimson', 'Already used!');
             changePlayer();
             return;
         }
@@ -122,7 +123,7 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
         for (let wordLetter of wordLetters) {
             let letterIndex = playerLetters.findIndex(x => x == wordLetter);
             if (letterIndex == -1) {
-                alert('You cannot form the word \'' + word + '\' with the letters \'' + playerLetterString + '\'');
+                flyingText('crimson', 'Incorrect letters!');
                 changePlayer();
                 return;
             } else {
@@ -142,7 +143,7 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
                         player.scoreElement.innerHTML = playerScore;
                         flyingText('limegreen', '+' + word.length);
                     } else {
-                        flyingText('red', 'Nope!');
+                        flyingText('crimson', 'Invalid word!');
                     }
                     changePlayer();
                 });

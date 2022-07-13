@@ -9,6 +9,8 @@ body {
     position: fixed;
     top: 50%;
     transform: translate(-50%, -50%);
+    white-space: nowrap;
+    z-index: 1;
 }
 
 .container {
