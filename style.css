@@ -59,7 +59,7 @@ h1 {
     grid-gap: 5px;
     height: 500px;
     margin-top: 20px;
-    width: 500px;
+    width: 50vh;
 }
 
 .row {
@@ -196,4 +196,8 @@ th, td {
 .fade-in {
     animation: fade-in 0.75s linear;
     display: flex !important;
+}
+
+#score-notification {
+    margin-top: 20px;
 }

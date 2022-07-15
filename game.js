@@ -112,7 +112,8 @@ export function flyingText(color, content) {
 }
 
 let dimension = 5;
-let winningScore = dimension;
+let winningScore = dimension * 5;
+document.getElementById('winning-score').innerHTML = winningScore;
 var timeLimit = 30;
 var timeTaken = 0;
 function countdown() {
