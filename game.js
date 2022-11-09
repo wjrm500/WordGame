@@ -95,9 +95,7 @@ function changePlayer() {
     enableGrid();
     disableWordEntry();
     clearInterval(countdownInterval);
-    clearInterval(volatileBoxesInterval);
     countdownInterval = setInterval(countdown, 50);
-    volatileBoxesInterval = setInterval(volatileBoxes, 1000);
 }
 
 let textFlash = document.getElementById('text-flash');
@@ -137,7 +135,7 @@ function volatileBoxes() {
         }, 5000);
     }
 }
-let volatileBoxesInterval = setInterval(volatileBoxes, 1000);
+setInterval(volatileBoxes, 1000);
 createGrid(dimension);
 let player1 = new Player('Player 1', grid.getBox(0, 0), 'red', document.getElementById('player-1-score'));
 let player2 = new Player('Player 2', grid.getBox(dimension - 1, dimension - 1), 'blue', document.getElementById('player-2-score'));
