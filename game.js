@@ -151,7 +151,7 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
         // Check whether player has already used word
         if (player.wordsUsed.includes(word)) {
             flyingText('red', 'Already used!');
-            changePlayer();
+            timeTaken += 5;
             return;
         }
         
@@ -165,7 +165,7 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
             let letterIndex = playerLetters.findIndex(x => x == wordLetter);
             if (letterIndex == -1) {
                 flyingText('red', 'Incorrect letters!');
-                changePlayer();
+                timeTaken += 5;
                 return;
             } else {
                 playerLetters.splice(letterIndex, 1);
@@ -187,7 +187,7 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
                     } else {
                         flyingText('red', 'Invalid word!');
                     }
-                    changePlayer();
+                    timeTaken += 5;
                 });
             }
         )
