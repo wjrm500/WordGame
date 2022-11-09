@@ -143,6 +143,10 @@ export let players = [player1, player2];
 export let activePlayerIndex = 0;
 colorBoxes();
 document.getElementById('active-player').innerHTML = players[activePlayerIndex].name;
+function invalidGuess() {
+    timeTaken += 5;
+    document.getElementById('word-entry').value = '';
+}
 document.getElementById('word-entry').addEventListener('keypress', function(evt) {
     if (evt.key == 'Enter') {
         let player = players[activePlayerIndex];
@@ -151,7 +155,7 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
         // Check whether player has already used word
         if (player.wordsUsed.includes(word)) {
             flyingText('red', 'Already used!');
-            timeTaken += 5;
+            invalidGuess();
             return;
         }
         
@@ -165,7 +169,7 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
             let letterIndex = playerLetters.findIndex(x => x == wordLetter);
             if (letterIndex == -1) {
                 flyingText('red', 'Incorrect letters!');
-                timeTaken += 5;
+                invalidGuess();
                 return;
             } else {
                 playerLetters.splice(letterIndex, 1);
@@ -187,7 +191,7 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
                         changePlayer();
                     } else {
                         flyingText('red', 'Invalid word!');
-                        timeTaken += 5;
+                        invalidGuess();
                     }
                 });
             }
