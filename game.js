@@ -183,11 +183,12 @@ document.getElementById('word-entry').addEventListener('keypress', function(evt)
                         playerScore += word.length;
                         player.score += word.length;
                         player.scoreElement.innerHTML = playerScore;
-                        flyingText('limegreen', '+' + word.length); 
+                        flyingText('limegreen', '+' + word.length);
+                        changePlayer();
                     } else {
                         flyingText('red', 'Invalid word!');
+                        timeTaken += 5;
                     }
-                    timeTaken += 5;
                 });
             }
         )
