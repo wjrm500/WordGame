@@ -96,6 +96,8 @@ function changePlayer() {
     disableWordEntry();
     clearInterval(countdownInterval);
     clearInterval(volatileBoxesInterval);
+    countdownInterval = setInterval(countdown, 50);
+    volatileBoxesInterval = setInterval(volatileBoxes, 1000);
 }
 
 let textFlash = document.getElementById('text-flash');
